@@ -24,6 +24,8 @@ config :shoehorn,
 
 config :logger, backends: [RingLogger]
 
+import_config "../../temp_tracker_ui/config/base.exs"
+
 # Authorize the device to receive firmware using your public key.
 # See https://hexdocs.pm/nerves_firmware_ssh/readme.html for more information
 # on configuring nerves_firmware_ssh.

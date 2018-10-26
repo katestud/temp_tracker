@@ -37,6 +37,7 @@ defmodule TempTrackerFw.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:temp_tracker_ui, path: "../temp_tracker_ui"},
       {:nerves, "~> 1.3", runtime: false},
       {:shoehorn, "~> 0.4"},
       {:ring_logger, "~> 0.4"}
