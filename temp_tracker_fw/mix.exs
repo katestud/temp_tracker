@@ -49,6 +49,7 @@ defmodule TempTrackerFw.MixProject do
 
   defp deps(target) do
     [
+      {:nerves_dht, "~> 0.1"},
       {:nerves_runtime, "~> 0.6"},
       {:nerves_init_gadget, "~> 0.4"},
     ] ++ system(target)
