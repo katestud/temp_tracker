@@ -39,6 +39,7 @@ defmodule TempTrackerFw.MixProject do
     [
       {:temp_tracker_ui, path: "../temp_tracker_ui"},
       {:nerves, "~> 1.3", runtime: false},
+      {:nerves_time, "~> 0.2"},
       {:shoehorn, "~> 0.4"},
       {:ring_logger, "~> 0.4"}
     ] ++ deps(@target)
