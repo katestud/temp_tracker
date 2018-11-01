@@ -37,6 +37,7 @@ defmodule TempTrackerFw.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:temp_tracker, path: "../temp_tracker"},
       {:temp_tracker_ui, path: "../temp_tracker_ui"},
       {:nerves, "~> 1.3", runtime: false},
       {:nerves_time, "~> 0.2"},
@@ -50,7 +51,6 @@ defmodule TempTrackerFw.MixProject do
 
   defp deps(target) do
     [
-      {:nerves_dht, "~> 0.1"},
       {:nerves_runtime, "~> 0.6"},
       {:nerves_init_gadget, "~> 0.4"},
     ] ++ system(target)
