@@ -3,6 +3,9 @@ defmodule TempTrackerFw.Application do
   # for more information on OTP Applications
   @moduledoc false
 
+  require RingLogger
+  require Logger
+
   @target Mix.Project.config()[:target]
 
   use Application
@@ -10,6 +13,9 @@ defmodule TempTrackerFw.Application do
   def start(_type, _args) do
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
+
+    RingLogger.attach
+
     opts = [strategy: :one_for_one, name: TempTrackerFw.Supervisor]
     Supervisor.start_link(children(@target), opts)
   end
