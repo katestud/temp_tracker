@@ -42,7 +42,8 @@ defmodule TempTrackerFw.MixProject do
       {:nerves, "~> 1.3", runtime: false},
       {:nerves_time, "~> 0.2"},
       {:shoehorn, "~> 0.4"},
-      {:ring_logger, "~> 0.4"}
+      {:ring_logger, "~> 0.4"},
+      {:toolshed, "~> 0.1"}
     ] ++ deps(@target)
   end
 

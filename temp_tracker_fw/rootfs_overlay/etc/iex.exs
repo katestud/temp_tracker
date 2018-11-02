@@ -1,5 +1,5 @@
 # Pull in Nerves-specific helpers to the IEx session
-use Nerves.Runtime.Helpers
+use Toolshed
 
 if RingLogger in Application.get_env(:logger, :backends, []) do
   IO.puts """
