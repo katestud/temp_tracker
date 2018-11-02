@@ -1,0 +1,3 @@
+<div class="jumbotron">
+  <h2><%= @temp %>°</h2>
+</div>
