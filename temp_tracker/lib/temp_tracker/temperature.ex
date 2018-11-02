@@ -14,6 +14,12 @@ defmodule TempTracker.Temperature do
     GenServer.start_link(__MODULE__, opts, name: __MODULE__)
   end
 
+  def read_temp do
+    get_sensors()
+    |> List.first
+    |> read_temp
+  end
+
   # GenServer API
 
   def init(_opts) do
