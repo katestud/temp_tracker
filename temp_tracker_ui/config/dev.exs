@@ -13,6 +13,8 @@ config :temp_tracker_ui, TempTrackerUiWeb.Endpoint,
   check_origin: false,
   watchers: []
 
+config :temp_tracker, temperature: TempTracker.FakeTemp
+
 # ## SSL Support
 #
 # In order to use HTTPS in development, a self-signed
