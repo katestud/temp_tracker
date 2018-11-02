@@ -6,10 +6,11 @@ defmodule TempTracker.Application do
   use Application
 
   def start(_type, _args) do
+    temperature_module = Application.get_env(:temp_tracker, :temperature, TempTracker.Temperature)
 
     # List all child processes to be supervised
     children = [
-      TempTracker.Temperature
+      temperature_module
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
