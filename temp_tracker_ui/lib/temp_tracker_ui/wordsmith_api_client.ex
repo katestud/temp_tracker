@@ -5,6 +5,7 @@ defmodule Wordsmith.API.Client do
   @base_url "https://api.automatedinsights.com/v1/"
   @project "intelligent-business"
   @template "master"
+  @api_token System.get_env("WORDSMITH_API_KEY")
 
   defp content_url do
     @base_url <> "projects/" <> @project <> "/templates/" <> @template <> "/outputs"
@@ -34,10 +35,8 @@ defmodule Wordsmith.API.Client do
     [
       "Content-Type": "application/json",
       "Accept": "application/json",
-      "Authorization": "Bearer #{api_token()}"
+      "Authorization": "Bearer #{@api_token}"
     ]
   end
-
-  defp api_token, do: System.get_env("WORDSMITH_API_KEY")
 
 end
