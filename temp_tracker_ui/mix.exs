@@ -39,7 +39,8 @@ defmodule TempTrackerUi.Mixfile do
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
       {:plug_cowboy, "~> 1.0"},
-      {:temp_tracker, path: "../temp_tracker"}
+      {:temp_tracker, path: "../temp_tracker"},
+      {:httpoison, "~> 1.4"}
     ]
   end
 end
