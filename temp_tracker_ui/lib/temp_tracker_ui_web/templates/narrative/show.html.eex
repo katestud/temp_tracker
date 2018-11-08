@@ -1,0 +1,3 @@
+<div class="jumbotron">
+  <h2><%= @narrative %></h2>
+</div>

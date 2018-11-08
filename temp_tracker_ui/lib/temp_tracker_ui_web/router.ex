@@ -18,6 +18,7 @@ defmodule TempTrackerUiWeb.Router do
 
     get "/", PageController, :index
     get "/temp", TemperatureController, :show
+    get "/intelligence", NarrativeController, :show
   end
 
   # Other scopes may use custom stacks.
