@@ -20,30 +20,39 @@ defmodule TempTracker.Temperature do
     |> read_temp
   end
 
+  def recent_readings, do: GenServer.call(__MODULE__, :recent_readings)
+
   # GenServer API
 
   def init(_opts) do
     state = %{
       sensors: get_sensors(),
-      temperatures: %{}
+      sensor_0: []
     }
     schedule_temp_reading()
 
     {:ok, state}
   end
 
-  def handle_info(:read_temp, state) do
-    temps =
-      state[:sensors]
-      |> Enum.with_index
-      |> Enum.map(&read_temp(&1))
-      |> IO.inspect
-
-    # state = %{state | temperatures: temps}
+  def handle_info(:update_temp_state, state) do
     Logger.info "State is: #{inspect state}"
+    temp =
+      state[:sensors]
+      |> List.first
+      |> read_temp
+
+    %{sensor_0: previous_temps} = state
+    temps = [{current_time(), temp} | previous_temps]
+
     schedule_temp_reading()
 
-    {:noreply, put_in(state, [:temperatures, time_string()], temps)}
+    {:noreply, put_in(state, [:sensor_0], temps)}
+  end
+
+  def handle_call(:recent_readings, _from, state) do
+    %{sensor_0: temps} = state
+
+    {:reply, recent_readings(temps), state}
   end
 
   defp get_sensors do
@@ -74,14 +83,40 @@ defmodule TempTracker.Temperature do
     |> Float.round(2)
   end
 
-  defp time_string do
+  defp current_time do
     DateTime.utc_now
     |> DateTime.truncate(:second)
     |> DateTime.to_string
+    |> String.slice(0..18)
   end
 
   defp schedule_temp_reading do
-    Process.send_after(self(), :read_temp, @measure_after)
+    Process.send_after(self(), :update_temp_state, @measure_after)
+  end
+
+  defp recent_readings([]) do
+    recent_readings([{nil, nil}])
+  end
+  defp recent_readings([{timestamp, temp} | tail]) do
+      initial_state = %{
+          "measurement_1_temp" => temp,
+          "measurement_1_timestamp" => timestamp
+      }
+      recent_readings(initial_state, tail, 2)
+  end
+
+  defp recent_readings(map, _, 11), do: map
+  defp recent_readings(map, [{timestamp, temp} | tail], num) do
+      map
+      |> Map.put("measurement_#{num}_temp", temp)
+      |> Map.put("measurement_#{num}_timestamp", timestamp)
+      |> recent_readings(tail, num + 1)
+  end
+  defp recent_readings(map, [], num) do
+      map
+      |> Map.put("measurement_#{num}_temp", nil)
+      |> Map.put("measurement_#{num}_timestamp", nil)
+      |> recent_readings([], num + 1)
   end
 
 end
