@@ -5,7 +5,7 @@ defmodule TempTrackerUiWeb.NarrativeController do
 
   def show(conn, _params) do
     data =
-      @temp_module.recent_readings(1)
+      @temp_module.recent_readings
       |> Map.put(:location, "Room 1")
 
     narrative = Wordsmith.API.Client.get_content(%{data: data})
