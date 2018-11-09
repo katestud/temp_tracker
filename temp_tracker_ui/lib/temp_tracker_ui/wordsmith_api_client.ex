@@ -15,6 +15,9 @@ defmodule Wordsmith.API.Client do
     case post(content_url(), Poison.encode!(data)) do
       {:ok, %HTTPoison.Response{status_code: 200, body: %{"data" => %{"content"=> content}}}} ->
         content
+      {:ok, %HTTPoison.Response{status_code: 400, body: %{"errors" => errors}}} ->
+        %{"detail" => detail} = List.first(errors)
+        detail
       {:ok, %HTTPoison.Response{status_code: 404}} ->
         "Not Found!"
       {:error, %HTTPoison.Error{reason: reason}} ->
