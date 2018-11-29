@@ -16,7 +16,7 @@ defmodule TempTrackerUiWeb.Router do
   scope "/", TempTrackerUiWeb do
     pipe_through :browser # Use the default browser stack
 
-    get "/", PageController, :index
+    get "/", NarrativeController, :show
     get "/temp", TemperatureController, :show
     get "/intelligence", NarrativeController, :show
   end
