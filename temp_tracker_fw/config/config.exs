@@ -45,10 +45,10 @@ config :nerves_firmware_ssh,
 # See https://hexdocs.pm/nerves_init_gadget/readme.html for more information.
 
 config :nerves_init_gadget,
-  ifname: "usb0",
-  address_method: :dhcpd,
+  ifname: "wlan0",
+  address_method: :dhcp,
   mdns_domain: "nerves.local",
-  node_name: nil,
+  node_name: :temp_tracker_fw,
   node_host: :mdns_domain,
   ssh_console_port: 22
 
