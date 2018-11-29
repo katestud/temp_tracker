@@ -3,7 +3,7 @@ defmodule TempTracker.Temperature do
   require Logger
 
   @sensor_dir "/sys/bus/w1/devices/"
-  @measure_after :timer.seconds(60)
+  @measure_after :timer.minutes(3)
 
   # Public API
 
