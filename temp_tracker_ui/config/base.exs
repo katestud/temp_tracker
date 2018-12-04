@@ -10,3 +10,6 @@ config :temp_tracker_ui, TempTrackerUiWeb.Endpoint,
   pubsub: [name: TempTrackerUi.PubSub,
            adapter: Phoenix.PubSub.PG2],
   code_reloader: false
+
+
+config :temp_tracker, temperature: TempTracker.Temperature

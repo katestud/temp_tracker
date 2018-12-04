@@ -1,7 +1,7 @@
 defmodule TempTrackerUiWeb.NarrativeController do
   use TempTrackerUiWeb, :controller
 
-  @temp_module Application.get_env(:temp_tracker, :temperature, TempTracker.Temperature)
+  @temp_module Application.get_env(:temp_tracker, :temperature)
 
   def show(conn, _params) do
     data =
