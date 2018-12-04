@@ -1,12 +1,17 @@
 # Temp Tracker
 
-This is work-in-progress nerves application to measure data from a Raspberry Pi. The project includes:
-* A Phoenix web server backend to provide API endpoints to retrieve data from the raspberry pi d
+This is a hobby nerves project built to collect temperature data using one or many Rasbperry Pi device(s). The application is set up to run on both RPi3 and RPi Zero W. Temperature measurements are taken using the [DS18B20 ](https://www.adafruit.com/product/381) temperature sensor using the one-wire protocol with GPIO.
 
-This application follows the [Poncho Project](http://embedded-elixir.com/post/2017-05-19-poncho-projects/) structure.
+The application follows the [poncho](https://embedded-elixir.com/post/2017-05-19-poncho-projects/) structure.
+* **temp_tracker_fw** includes all nerves dependencies necessary and is used to build the firmware
+* **temp_tracker** contains the business logic for measuring temperature data from the device
+* **temp_tracker_ui** is a phoenix application and provides the web interface for reading measurements
 
 ## Setup
 
+To deploy the application, ensure your SSH key is set up. Set the local wifi credentials in your environment using `NERVES_NETWORK_SSID` and `NERVES_NETWORK_PSK`.
+
+To build and push the firmware to an SD card:
 ``` bash
 cd temp_tracker_fw
 export MIX_TARGET=rpi0
@@ -23,3 +28,7 @@ Once the device is on the network,
 mix firmware.push nerves.local
 ```
 
+To access the device's iex console:
+```
+ssh nerves.local
+```
