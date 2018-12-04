@@ -60,14 +60,6 @@ defmodule TempTracker.Temperature do
     |> Enum.filter(&(String.starts_with?(&1, "28-")))
   end
 
-  defp read_temp({sensor, index}) do
-    atom =
-      "sensor_" <> Integer.to_string(index)
-      |> String.to_atom
-
-    %{atom => read_temp(sensor)}
-  end
-
   defp read_temp(sensor) do
     File.read!("#{@sensor_dir}#{sensor}/w1_slave")
     |> extract_temp
