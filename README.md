@@ -11,9 +11,28 @@ The application follows the [poncho](https://embedded-elixir.com/post/2017-05-19
 
 To deploy the application, ensure your SSH key is set up. Set the local wifi credentials in your environment using `NERVES_NETWORK_SSID` and `NERVES_NETWORK_PSK`.
 
+First, prep the Phoenix project:
+
+  ```bash
+  # These steps only need to be done once.
+  cd temp_tracker_ui
+  mix deps.get
+  npm install --prefix assets
+  ```
+
+Build your assets and prepare them for deployment to the firmware:
+
+  ```bash
+  # Still in temp_tracker_ui directory from the prior step.
+  # These steps need to be repeated when you change JS or CSS files.
+  npm install --prefix assets --production
+  npm run deploy --prefix assets
+  mix phx.digest
+  ```
+
 To build and push the firmware to an SD card:
 ``` bash
-cd temp_tracker_fw
+cd ../temp_tracker_fw
 export MIX_TARGET=rpi0
 export NERVES_NETWORK_PSK=PASSKEY
 export NERVES_NETWORK_SSID=SSID
@@ -25,7 +44,7 @@ mix firmware.burn
 Once the device is on the network,
 
 ```
-mix firmware.push nerves.local
+mix upload nerves.local
 ```
 
 To access the device's iex console:

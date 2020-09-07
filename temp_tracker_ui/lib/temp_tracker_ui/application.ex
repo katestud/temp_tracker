@@ -1,17 +1,20 @@
 defmodule TempTrackerUi.Application do
-  use Application
-
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
-  def start(_type, _args) do
-    import Supervisor.Spec
+  @moduledoc false
 
-    # Define workers and child supervisors to be supervised
+  use Application
+
+  def start(_type, _args) do
     children = [
-      # Start the endpoint when the application starts
-      supervisor(TempTrackerUiWeb.Endpoint, []),
-      # Start your own worker by calling: TempTrackerUi.Worker.start_link(arg1, arg2, arg3)
-      # worker(TempTrackerUi.Worker, [arg1, arg2, arg3]),
+      # Start the Telemetry supervisor
+      TempTrackerUiWeb.Telemetry,
+      # Start the PubSub system
+      {Phoenix.PubSub, name: TempTrackerUi.PubSub},
+      # Start the Endpoint (http/https)
+      TempTrackerUiWeb.Endpoint
+      # Start a worker by calling: TempTrackerUi.Worker.start_link(arg)
+      # {TempTrackerUi.Worker, arg}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
