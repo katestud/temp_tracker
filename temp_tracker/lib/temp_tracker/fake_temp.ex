@@ -8,7 +8,7 @@ defmodule TempTracker.FakeTemp do
   end
 
   def read_temp do
-    71.25
+    Enum.random(65..88)
   end
 
   def recent_readings do
