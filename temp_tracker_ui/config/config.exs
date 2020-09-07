@@ -3,10 +3,28 @@
 #
 # This configuration file is loaded before any dependency and
 # is restricted to this project.
+
+# General application configuration
 use Mix.Config
 
-import_config "base.exs"
+# Configures the endpoint
+config :temp_tracker_ui, TempTrackerUiWeb.Endpoint,
+  url: [host: "localhost"],
+  secret_key_base: "mnZo4Ic5J5XBcF2Htzmif4JQXi6ESkEVvnU7sgVyNU4Fbk/RPjr73+6lTxEOs85i",
+  render_errors: [view: TempTrackerUiWeb.ErrorView, accepts: ~w(html json), layout: false],
+  pubsub_server: TempTrackerUi.PubSub,
+  live_view: [signing_salt: "ukecSYuC"]
+
+# Configures Elixir's Logger
+config :logger, :console,
+  format: "$time $metadata[$level] $message\n",
+  metadata: [:request_id]
+
+# Use Jason for JSON parsing in Phoenix
+config :phoenix, :json_library, Jason
+
+config :temp_tracker, temperature: TempTracker.Temperature
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
-import_config "#{Mix.env}.exs"
+import_config "#{Mix.env()}.exs"
