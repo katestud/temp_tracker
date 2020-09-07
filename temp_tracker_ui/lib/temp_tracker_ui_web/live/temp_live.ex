@@ -7,8 +7,8 @@ defmodule TempTrackerUiWeb.TempLive do
 
   def render(assigns) do
     ~L"""
-    <div class="jumbotron">
-      <h2><%= @temperature %>°</h2>
+    <div>
+      <h2>The current temperature is <%= @temperature %>°</h2>
     </div>
     """
   end

@@ -10,10 +10,14 @@ use Mix.Config
 # Configures the endpoint
 config :temp_tracker_ui, TempTrackerUiWeb.Endpoint,
   url: [host: "localhost"],
+  http: [port: 80],
+  server: true,
+  root: Path.dirname(__DIR__),
   secret_key_base: "mnZo4Ic5J5XBcF2Htzmif4JQXi6ESkEVvnU7sgVyNU4Fbk/RPjr73+6lTxEOs85i",
   render_errors: [view: TempTrackerUiWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: TempTrackerUi.PubSub,
-  live_view: [signing_salt: "ukecSYuC"]
+  live_view: [signing_salt: "ukecSYuC"],
+  code_reloader: false
 
 # Configures Elixir's Logger
 config :logger, :console,
